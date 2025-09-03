@@ -419,7 +419,7 @@ export const MessageActions = () => {
               <Button
                 size={isAboveMd ? "default" : "sm"}
                 variant="outlined"
-                onClick={() => handleSend({ assign: false, close: false })}
+                onClick={() => handleSend({ assign: !conversation?.cc, close: false })}
                 disabled={sendDisabled}
               >
                 Reply
