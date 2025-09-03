@@ -52,4 +52,16 @@ test.describe("Settings - User preferences", () => {
     await waitForSettingsSaved(page);
     await expect(nextTicketPreviewSwitch).not.toBeChecked();
   });
+
+  test("should allow toggling on/off the auto assign ticket when replied", async ({ page }) => {
+    const autoAssignTicketWhenRepliedSetting = page.locator('h2:text("Auto Assign Ticket When Replied")');
+    const autoAssignTicketWhenRepliedSwitch = page.locator('[aria-label="Auto Assign Ticket When Replied Switch"]');
+
+    await expect(autoAssignTicketWhenRepliedSetting).toBeVisible();
+    await expect(autoAssignTicketWhenRepliedSwitch).toBeChecked();
+
+    await autoAssignTicketWhenRepliedSwitch.click();
+    await waitForSettingsSaved(page);
+    await expect(autoAssignTicketWhenRepliedSwitch).not.toBeChecked();
+  });
 });
