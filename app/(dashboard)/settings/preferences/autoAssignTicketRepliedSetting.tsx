@@ -11,7 +11,7 @@ import { SwitchSectionWrapper } from "../sectionWrapper";
 const AutoAssignTicketRepliedSetting = () => {
   const { user } = useSession() ?? {};
   const [autoAssignTicketWhenRepliedEnabled, setAutoAssignTicketWhenRepliedEnabled] = useState(
-    !user?.preferences?.disableNextTicketPreview,
+    user?.preferences?.autoAssignTicketWhenReplied ?? false,
   );
   const savingIndicator = useSavingIndicator();
   const utils = api.useUtils();
@@ -47,9 +47,8 @@ const AutoAssignTicketRepliedSetting = () => {
         description="Automatically assign a ticket when a user replies to an email"
         initialSwitchChecked={autoAssignTicketWhenRepliedEnabled}
         onSwitchChange={handleSwitchChange}
-      >
-        <></>
-      </SwitchSectionWrapper>
+        children={null}
+      />
     </div>
   );
 };

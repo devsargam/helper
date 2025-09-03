@@ -266,6 +266,7 @@ export const MessageActions = () => {
     stopRecording();
     setSending(true);
     const originalDraftedEmail = { ...draftedEmail, files: readyFiles };
+    const shouldAutoAssign = assign && user?.preferences?.autoAssignTicketWhenReplied;
 
     try {
       const cc = parseEmailList(draftedEmail.cc);
@@ -288,7 +289,7 @@ export const MessageActions = () => {
         fileSlugs: readyFiles.flatMap((f) => (f.slug ? [f.slug] : [])),
         cc: cc.data,
         bcc: bcc.data,
-        shouldAutoAssign: assign,
+        shouldAutoAssign,
         shouldClose: close,
         responseToId: lastUserMessage?.id ?? null,
       });
@@ -429,7 +430,7 @@ export const MessageActions = () => {
               </Button>
               <Button
                 size={isAboveMd ? "default" : "sm"}
-                onClick={() => handleSend({ assign: false })}
+                onClick={() => handleSend({ assign: !conversation?.cc })}
                 disabled={sendDisabled}
               >
                 {sending ? "Replying..." : "Reply and close"}
