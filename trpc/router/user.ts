@@ -190,6 +190,7 @@ export const userRouter = {
           .object({
             confetti: z.boolean().optional(),
             disableNextTicketPreview: z.boolean().optional(),
+            autoAssignTicketWhenReplied: z.boolean().optional(),
           })
           .optional(),
       }),
